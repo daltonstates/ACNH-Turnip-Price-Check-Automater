@@ -52,6 +52,7 @@ def parseValue(post):
 
 
 # Grab Numbers from Converted Post Title
+
 def parseNumbers(post):
     consectuiveNumbers = 0
     output = ""
