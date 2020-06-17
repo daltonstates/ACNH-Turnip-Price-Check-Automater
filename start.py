@@ -54,7 +54,6 @@ def parseValue(post):
 # Grab Numbers from Converted Post Title
 def parseNumbers(post):
     consectuiveNumbers = 0
-    foundConsecutiveNumber = False
     output = ""
     for char in post:
         if char in NUMBERS and len(output) < 3:
