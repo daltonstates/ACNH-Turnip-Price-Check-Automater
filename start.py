@@ -10,11 +10,6 @@ toaster = ToastNotifier()
 reddit = praw.Reddit(client_id="1t0X1QMmWv8JMQ",
                      client_secret="Vgjq9re806hAC6YqMmCAThY1YOE", user_agent="states95")
 
-# print(reddit.read_only)  # Output: True
-
-
-NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
 lastURL = ""
 
 NUMBER_ARRAY = [
@@ -32,9 +27,7 @@ NUMBER_ARRAY = [
 
 
 def readValue(post):
-    stripPost = post.replace("-", "")
-
-    return parseValue(stripPost)
+    return parseValue(post)
 
 
 def parseValue(post):
@@ -52,31 +45,47 @@ def parseValue(post):
 
 
 # Grab Numbers from Converted Post Title
-
 def parseNumbers(post):
     consectuiveNumbers = 0
     output = ""
     for char in post:
-        if char in NUMBERS and len(output) < 3:
+        if char.isdigit() and len(output) < 3:
             consectuiveNumbers += 1
             output += char
     print("Final Value: " +
           output+"\n")
     return output
 
-
 def openURL():
     webbrowser.open(lastURL, new=2)
 
+print("*****Animal Crossing Turnip Exchange Price Checker*****")
+min_price = input("Minimum Price (Default is 0): ")
 
 while True:
+    if min_price.isdigit() and len(min_price) <= 3 and len(min_price) >= 1 and int(min_price) >= 0:
+        break
+    elif min_price == "":
+        min_price = 0
+        break
+    else:
+        if len(min_price) > 3 and len(min_price) < 1:
+            print("Invalid Input - Must be a Number between 0-999")
+        else:
+            print("Invalid Input - Only Enter Numbers")
+        min_price = input("Minimum Price: ")
+
+print("Setting Minimum Price to: " + str(min_price))
+
+while True:
+    print("Checking /r/acturnips Every 10 Seconds for New Posts")
     for submission in reddit.subreddit("acturnips").new(limit=1):
         print(submission.title)
         print(submission.url)
-        if lastURL != submission.url:
+        value = readValue(submission.title)
+        if lastURL != submission.url and int(min_price) <= int(value):
             lastURL = submission.url
-            playsound('Master Sword.mp3')
-            toaster.show_toast("New Turnip Price", submission.title + "\n" + readValue(
-                submission.title), icon_path="leaf_icon.ico", callback_on_click=openURL)
-                
+            #playsound('Master Sword.mp3')
+            toaster.show_toast("New Turnip Price", submission.title + "\n" + value, icon_path="leaf_icon.ico")
+
     time.sleep(10)
