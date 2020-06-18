@@ -14,15 +14,15 @@ lastURL = ""
 
 NUMBER_ARRAY = [
     ["0", "zero"],
-    ["1", "one", "uni", "une"],
-    ["2", "two"],
-    ["3", "three", "thirty", "tree"],
-    ["4", "four", "fourty"],
-    ["5", "five", 'fifty', "fiive"],
-    ["6", "six", "sixty"],
-    ["7", "seven", "seventy"],
-    ["8", "eight", "eighty"],
-    ["9", "nine", "ninety"]
+    ["1", "one", "uni", "une", "uno"],
+    ["2", "two", "dos"],
+    ["3", "three", "thirty", "tree", "tres"],
+    ["4", "four", "fourty", "quatro"],
+    ["5", "five", 'fifty', "fiive", "cinco"],
+    ["6", "six", "sixty", "seis"],
+    ["7", "seven", "seventy", "siete"],
+    ["8", "eight", "eighty", "ocho"],
+    ["9", "nine", "ninety", "nueve"]
 ]
 
 
